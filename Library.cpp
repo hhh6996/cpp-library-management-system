@@ -162,10 +162,11 @@ void Library::deleteItem() {
 
     for (auto it = items.begin(); it != items.end(); ++it) {
         if ((*it)->getIsbn() == keyword) {
-            // 检查是否正在被借阅
+            // 检查是否有任何关联的借阅记录（含已归还）
+            // 否则删除后 BorrowRecord 中的 Item* 会变成悬空指针
             for (auto& r : records) {
-                if (!r.isReturned() && r.getItem() == *it) {
-                    cout << "该物品正在被借阅，无法删除！" << endl;
+                if (r.getItem() == *it) {
+                    cout << "该物品存在借阅记录，无法删除！" << endl;
                     return;
                 }
             }
@@ -278,9 +279,16 @@ void Library::deleteUser() {
 
     for (auto it = users.begin(); it != users.end(); ++it) {
         if ((*it)->getId() == id) {
-            // 检查是否有未还的书
-            if (countBorrowedBy(id) > 0) {
-                cout << "该读者尚有未归还的图书，无法删除！" << endl;
+            // 检查是否有任何关联的借阅记录（含已归还）
+            bool hasRecords = false;
+            for (auto& r : records) {
+                if (r.getBorrower()->getId() == id) {
+                    hasRecords = true;
+                    break;
+                }
+            }
+            if (hasRecords) {
+                cout << "该读者存在借阅记录，无法删除！" << endl;
                 return;
             }
             delete *it;
