@@ -18,6 +18,9 @@ package-lock.json
 md2pdf.js
 report.html
 
+# PPT generator
+make_ppt.py
+
 # IDE
 .vs/
 *.user
