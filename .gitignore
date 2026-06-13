@@ -1,0 +1,17 @@
+# Build artifacts
+*.exe
+*.o
+*.obj
+
+# Test files
+test_*.txt
+scenario*_output.txt
+
+# Playwright
+.playwright-mcp/
+screenshot*.html
+
+# IDE
+.vs/
+*.user
+*.suo
