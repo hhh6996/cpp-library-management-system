@@ -11,6 +11,13 @@ scenario*_output.txt
 .playwright-mcp/
 screenshot*.html
 
+# Node
+node_modules/
+package.json
+package-lock.json
+md2pdf.js
+report.html
+
 # IDE
 .vs/
 *.user
