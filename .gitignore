@@ -25,3 +25,6 @@ make_ppt.py
 .vs/
 *.user
 *.suo
+
+# Office temp
+~$*
